@@ -1,0 +1,10 @@
+<div class="card">
+
+    <img  [src]="'data:image/webp;base64,' + car.picture" loading="lazy"/>
+    <div class="general-info">
+        <h3>{{car.brand}}<span> {{car.model}}</span></h3>
+        <p><span class="fw-bold">{{car.pricePerDay}}$</span>/day <span class="text-danger">{{car.available ? '': 'not available'}}</span></p>
+        <button class="btn btn-rent" [disabled]="!car.available">Rent Now</button>
+
+    </div>
+</div>

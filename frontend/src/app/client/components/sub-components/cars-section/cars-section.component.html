@@ -1,0 +1,15 @@
+<section id="explorecars">
+<div  class="container">
+    <h2>Our Imppressive Car Collection</h2>
+    <p>Our collection features the finest luxury vehicles, ranging from elegant sedans to high-performance sports cars and exclusive hypercars. Each model is carefully selected to provide an unparalleled driving experience, combining cutting-edge technology, superior craftsmanship, and timeless design.</p>
+    <ul>
+        <li *ngFor="let car of cars">
+            <app-car-card [car]="car"></app-car-card>
+        </li>
+    </ul>
+
+    <button class="btn btn-all" routerLink="/cars">See All Cars</button>
+
+</div>
+   
+</section>

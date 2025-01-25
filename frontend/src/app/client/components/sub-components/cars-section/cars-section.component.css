@@ -1,0 +1,51 @@
+.container{
+    text-align: center;
+    padding: 2em 0;
+
+}
+.container h2{
+    font-weight: 700;
+    font-size: 2.3rem;
+}
+.container p{
+    max-width:50%;
+    font-size: 0.8rem;
+    margin: auto;
+    font-weight: 500;
+}
+section{
+    background-color: rgba(245, 245, 245, 1);
+    padding-top: 2em;
+}
+
+ul{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    /* justify-content: space-between; */
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 2%;
+    padding-left: 0;
+    list-style: none;
+    margin: 3em auto 0;
+}
+
+.btn-all{
+    border-radius: 30px;
+   
+    border: 1px solid #000;
+    font-size: 0.8rem;
+    font-weight: 500;
+    background-color: #000;
+   
+    color: #fff;
+    font-weight: bold;
+    padding: 0.5em 2em ;
+}
+
+.btn-all:hover{
+    color: #000;
+    background-color: transparent;
+    border: 2px solid #000;
+}

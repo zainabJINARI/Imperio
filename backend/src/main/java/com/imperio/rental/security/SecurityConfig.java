@@ -57,6 +57,7 @@ public class SecurityConfig {
 				.csrf(csrf-> csrf.disable())
 				.cors(Customizer.withDefaults())
 				.authorizeHttpRequests(ar->ar.requestMatchers("/api/cars/auth/**").permitAll())//
+				.authorizeHttpRequests(ar->ar.requestMatchers("/api/cars/all/**").permitAll())//
 				.authorizeHttpRequests(ar->ar.anyRequest().authenticated())		
 				.oauth2ResourceServer(oa->oa.jwt(Customizer.withDefaults()))
 				.build();

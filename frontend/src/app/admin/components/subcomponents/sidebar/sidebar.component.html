@@ -1,0 +1,35 @@
+<section id="sidebar" class="sidbar">
+    <a href="#" class="brand">
+      <img class="logo-imperio" src="logo.png" alt="logo of imperio" />
+    </a>
+    <ul class="side-menu top">
+  
+      
+  
+  
+  
+      <li routerLinkActive="active">
+        <a [routerLink]="['/admin/cars']">
+          <i class='bx bxs-calendar-check'></i>
+          <span class="text" [routerLink]="['/admin/cars']">Manage Cars</span>
+        </a>
+      </li>
+  
+     
+    
+  
+   
+      <li>
+        <a href="#">
+          <i class='bx bxs-cog'></i>
+          <span class="text">Settings</span>
+        </a>
+      </li>
+      <li>
+        <a href="/login" class="logout" (click)="onLogout()">
+          <i class='bx bxs-log-out-circle'></i>
+          <span class="text">Logout</span>
+        </a>
+      </li>
+    </ul>
+  </section>

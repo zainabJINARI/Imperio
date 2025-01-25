@@ -1,0 +1,23 @@
+
+section.container{
+    padding: 2em 0; 
+}
+ul{
+    display: flex;
+    flex-direction: grid;
+    flex-wrap: wrap;
+    /* justify-content: space-between; */
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    gap: 6%;
+    padding-left: 0;
+   
+}
+ul  >*{
+   width:100px ;
+   margin: 0.5em 0;
+}
+
+h2{
+    font-size: 1rem;
+    font-weight: 600;
+}

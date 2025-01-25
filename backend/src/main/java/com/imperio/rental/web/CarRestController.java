@@ -34,7 +34,7 @@ public class CarRestController {
 	
 	
 	
-	@GetMapping("")
+	@GetMapping("/all")
 	public PaginatedResponse<Car> getAllCars(
 			  @RequestParam( defaultValue = "0") int page,
 		        @RequestParam( defaultValue = "5") int size
