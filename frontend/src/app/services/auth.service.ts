@@ -1,7 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-
+import { jwtDecode } from "jwt-decode";
 @Injectable({
   providedIn: 'root'
 })
@@ -27,8 +26,39 @@ export class AuthService {
       }
     })
   }
+
+  getToken():string{
+   
+    
+    let token = JSON.parse(localStorage.getItem('token') || '') ? JSON.parse(localStorage.getItem('token') || '')['access-token']: ''
+    console.log(token)
+    return this.verifyToken(token) ? token : null
+  }
+
+  verifyToken(token:string){
+
+    if (!token) {
+      console.error("Token is missing!");
+      return false;
+    }
+
+    try {
+      const decoded: any = jwtDecode(token);
+      // Current timestamp in seconds
+      const currentTime = Math.floor(Date.now() / 1000); 
+      // Check if token is still valid
+      return decoded.exp > currentTime; 
+    } catch (error) {
+      console.error("Error decoding token:", error);
+      return false;
+    }
+  
+
+  }
   isAuthenticated(){
 
   }
 
 }
+
+
