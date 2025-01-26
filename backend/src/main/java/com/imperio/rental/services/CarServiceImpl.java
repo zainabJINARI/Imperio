@@ -124,9 +124,17 @@ public class CarServiceImpl  implements ICarService{
     }
 
 	@Override
-	public PaginatedResponse<Car> getAllCars(int page,int size) {
+	public PaginatedResponse<Car> getAllCars(int page,int size , Boolean available) {
 		
-		Page<Car> carPage = carRepository.findAll(PageRequest.of(page, size));
+		
+		Page<Car> carPage = null;
+		if(available ==null) {
+			carPage= carRepository.findAll(PageRequest.of(page, size));
+		}else {
+			carPage = carRepository.findByIsAvailable((boolean)available, PageRequest.of(page,size));
+		}
+		
+		
 		List<Car> cars = carPage.getContent().stream().map(c->{
 			
 			String sanitizedPhotoPath = c.getPicture().replace("file:///", "").replace("file:/", "");
@@ -147,5 +155,7 @@ public class CarServiceImpl  implements ICarService{
 		
 		return new PaginatedResponse<>(cars, carPage.getTotalElements());
 	}
+
+	
 
 }

@@ -14,8 +14,7 @@ public interface ICarService {
 	public Long createCar(CarDto car) throws IOException;
 	public boolean deleteCar(Long id) throws CarNotFoundException;
 	public Car updateCar(CarDto car) throws CarNotFoundException, IOException;
-	public PaginatedResponse<Car> getAllCars(int page,int size);
-	
+	public PaginatedResponse<Car> getAllCars(int page,int size, Boolean available);
 	
 
 }

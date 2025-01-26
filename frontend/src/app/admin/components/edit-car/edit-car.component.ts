@@ -62,7 +62,7 @@ export class EditCarComponent {
           formData.append('brand', this.carForm.get('brand')?.value);
           formData.append('model', this.carForm.get('model')?.value);
           formData.append('pricePerDay', this.carForm.get('pricePerDay')?.value);
-          formData.append('available',this.carForm.get('available')?.value)
+          formData.append('isAvailable',this.carForm.get('available')?.value)
           
           const imageFile = this.carForm.get('picture')?.value;
           if (imageFile) {

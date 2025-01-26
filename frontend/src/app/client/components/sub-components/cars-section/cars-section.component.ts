@@ -14,9 +14,10 @@ export class CarsSectionComponent  implements OnInit{
   constructor(private carService:CarService){}
   ngOnInit(): void {
     this.isloading=true
-    this.carService.getCars(0,8,(data)=>{
+    this.carService.getCars(0,8,true,(data:any)=>{
       this.isloading=false
       this.cars=data.items
+      console.log('items found',this.cars)
 
 
     })

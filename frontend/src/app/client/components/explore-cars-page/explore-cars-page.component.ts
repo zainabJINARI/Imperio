@@ -22,7 +22,7 @@ export class ExploreCarsPageComponent  implements OnInit{
        
       }
       fetchResults(){
-        this.carService.getCars(this.currentPage,this.carsPerPage,(data)=>{
+        this.carService.getCars(this.currentPage,this.carsPerPage,true,(data:any)=>{
           this.isloading=false
           this.cars=data.items
           console.log('items')

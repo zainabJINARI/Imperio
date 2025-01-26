@@ -23,7 +23,7 @@ export class CarsPageComponent {
 
   }
   fetchResults() {
-    this.carService.getCars(this.currentPage, this.carsPerPage, (data) => {
+    this.carService.getCars(this.currentPage, this.carsPerPage,null, (data) => {
       this.isloading = false
       this.cars = data.items
 

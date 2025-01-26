@@ -35,25 +35,51 @@ export class CarService  implements OnInit{
    
   }
 
-  public getCars(page:number=0,size:number=8,callback=(data:any)=>{}){
+  public getCars(page:number=0,size:number=8,available:any=null,callback=(data:any)=>{}){
    
     if(this.cars.length>page*size){
-      let result= this.cars.slice(page*size,page*size+size)
+      let totalRes;
+      if(available !=null){
+        console.log('am in available is not  null ')
+        let boolValue: boolean = Boolean(available);
+
+        totalRes = this.cars.filter(c=>c.available == boolValue)
+
+      }else{
+
+        totalRes=this.cars
+      }
+
+      let result= totalRes.slice(page*size,page*size+size)
+
+      
     
       
-      callback({items:result,totalItems:this.cars.length})
+      callback({items:result,totalItems:totalRes.length})
     }else{
-       this.fetchCars(page,size,callback)
+       this.fetchCars(page,size,available,callback)
 
     }
 
   }
   
-  private fetchCars(page:number,size:number,callback=(data:any)=>{}){
+  private fetchCars(page:number,size:number,available:any=null,callback=(data:any)=>{}){
 
+
+ 
     let params = new HttpParams()
       .set('page', page.toString())
-      .set('size', size.toString());
+      .set('size', size.toString())
+
+      if(available !=null){
+        let boolValue: boolean = Boolean(available);
+        
+        params= new HttpParams()
+        .set('page', page.toString())
+        .set('size', size.toString())
+        .set('available',`${boolValue}`);
+
+      }
 
     
        this.http.get<any>(`${this.baseUrl}/all`, { params }).subscribe({
@@ -142,6 +168,7 @@ export class CarService  implements OnInit{
 
     this.http.put<Car>(`${this.baseUrl}/${id}`,carData,{headers:headersData}).subscribe({
       next:(updatedCar)=>{
+        console.log(carData)
        
        
        
