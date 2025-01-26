@@ -5,8 +5,11 @@
 img{
     width: 120px;
 }
-
 .btn-login{
+    margin-left: auto;
+}
+
+.btn-login, .btn-logout, .btn-dashboard{
     color: #fff;
     border: 2px solid #fff;
     border-radius: 50px;
@@ -14,7 +17,7 @@ img{
     font-size: 1em;
 
 }
-.btn-login:hover{
+.btn-login:hover, .btn-logout:hover, .btn-dashboard:hover{
     color: #fff;
     border: 2px solid #fff;
 
@@ -25,7 +28,7 @@ img{
         width: 90px;
     }
 
-    .btn-login{
+    .btn-login,.btn-logout, .btn-dashboard{
         font-size: 0.9rem;
         padding: 0.5em 1em;
     }

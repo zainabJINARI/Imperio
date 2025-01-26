@@ -55,7 +55,21 @@ export class AuthService {
   
 
   }
-  isAuthenticated(){
+  logout(callback=()=>{}){
+
+    this.http.post<any>(`${this.baseUrl}/logout`,null).subscribe({
+      next:(response)=>{
+        localStorage.clear()
+        alert(`${JSON.stringify(response)}`)
+        callback()
+
+
+      },
+      error:(error)=>{
+        
+        alert('error while trying to log out '+error)
+      }
+    })
 
   }
 

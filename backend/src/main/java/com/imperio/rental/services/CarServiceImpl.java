@@ -63,6 +63,7 @@ public class CarServiceImpl  implements ICarService{
 		
 		
 		Car carToUpdate = carRepository.findById(car.getId()).orElse(null);
+		
 		if(carToUpdate==null) {
 			throw new CarNotFoundException("Car Not Found for id "+car.getId());
 		}else {
@@ -79,8 +80,9 @@ public class CarServiceImpl  implements ICarService{
 			    if (car.getPricePerDay() != 0) {
 			        carToUpdate.setPricePerDay(car.getPricePerDay());
 			    }
+			    String returnedImage=null;
 			    if(car.getPicture()!=null) {
-//			    	logic to update the image 
+//			    	logic to update the image if the user wants to 
 			    	
 			    	try {
 						Files.deleteIfExists(Paths.get(URI.create(carToUpdate.getPicture())));
@@ -90,17 +92,25 @@ public class CarServiceImpl  implements ICarService{
 					}
 					Path path = Paths.get(System.getProperty("user.home"),"cars-app-files","cars-images");
 					String imageId = UUID.randomUUID().toString();
-					Path imagePath = Paths.get(System.getProperty("user.home"),"cars-app-files","cars-images",imageId+".png");
+					Path imagePath  = Paths.get(System.getProperty("user.home"),"cars-app-files","cars-images",imageId+".png");
 					Files.copy(car.getPicture().getInputStream(),imagePath);
 					carToUpdate.setPicture(imagePath.toUri().toString());
+					returnedImage = encodeImageToBase64(imagePath);
 			    	
 			    	
 			    	
 			    }
 			
+			    carRepository.save(carToUpdate);
+			    
+//			    if use didn't change the image the image is already present in the frontend no need to send it again 
+			    carToUpdate.setPicture(returnedImage);
+		        
+
+		        
+				return carToUpdate;
 		}
-        carRepository.save(carToUpdate);
-		return carToUpdate;
+      
 	}
 	
 	private  String encodeImageToBase64(Path imagePath) {

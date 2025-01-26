@@ -1,4 +1,7 @@
-<div class="card">
+
+
+
+<div *ngIf="car; else defaultCard"  class="card">
 
     <img  [src]="'data:image/webp;base64,' + car.picture" loading="lazy"/>
     <div class="general-info">
@@ -8,3 +11,16 @@
 
     </div>
 </div>
+
+
+
+<ng-template #defaultCard>
+    <div class="card">
+        <img src="default_car.png" loading="lazy"/>
+        <div class="general-info">
+            <h3>Unknown Brand <span>Model</span></h3>
+            <p><span class="fw-bold">N/A</span>/day <span class="text-danger">Not Available</span></p>
+            <button class="btn btn-rent" disabled>Rent Now</button>
+        </div>
+    </div>
+</ng-template>

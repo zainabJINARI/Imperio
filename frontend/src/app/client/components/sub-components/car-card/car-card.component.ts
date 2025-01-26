@@ -10,6 +10,11 @@ import { Car } from '../../../../models/Car';
 export class CarCardComponent  {
 
   @Input()
-  car!:Car
+  car?:Car
+
+ 
+
+
+ 
 
 }

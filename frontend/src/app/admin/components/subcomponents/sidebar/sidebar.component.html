@@ -9,7 +9,7 @@
   
   
       <li routerLinkActive="active">
-        <a [routerLink]="['/admin/cars']">
+        <a [routerLink]="['/admin']">
           <i class='bx bxs-calendar-check'></i>
           <span class="text" [routerLink]="['/admin/cars']">Manage Cars</span>
         </a>
@@ -19,14 +19,9 @@
     
   
    
+     
       <li>
-        <a href="#">
-          <i class='bx bxs-cog'></i>
-          <span class="text">Settings</span>
-        </a>
-      </li>
-      <li>
-        <a href="/login" class="logout" (click)="onLogout()">
+        <a href="#" class="logout" (click)="onLogout()">
           <i class='bx bxs-log-out-circle'></i>
           <span class="text">Logout</span>
         </a>

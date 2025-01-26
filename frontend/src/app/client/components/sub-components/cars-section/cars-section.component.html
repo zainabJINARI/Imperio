@@ -1,14 +1,21 @@
+
+
 <section id="explorecars">
 <div  class="container">
     <h2>Our Imppressive Car Collection</h2>
     <p>Our collection features the finest luxury vehicles, ranging from elegant sedans to high-performance sports cars and exclusive hypercars. Each model is carefully selected to provide an unparalleled driving experience, combining cutting-edge technology, superior craftsmanship, and timeless design.</p>
     <ul>
+        <app-loading-popup *ngIf="isloading"></app-loading-popup>
+        <li *ngIf="cars.length==0" class="default">
+           <span class="text-danger fw-bold">We Have No Cars Yet</span>  
+            <app-car-card [car]="undefined"></app-car-card>
+        </li>
         <li *ngFor="let car of cars">
             <app-car-card [car]="car"></app-car-card>
         </li>
     </ul>
 
-    <button class="btn btn-all" routerLink="/cars">See All Cars</button>
+    <a  *ngIf="cars.length" class="btn btn-all" href="/cars">See All Cars</a>
 
 </div>
    

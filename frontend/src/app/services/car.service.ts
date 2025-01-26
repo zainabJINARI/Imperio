@@ -93,6 +93,11 @@ export class CarService  implements OnInit{
     
   }
 
+
+  public getCarById(id:number){
+    return this.cars.find(c=>c.id==id)
+  }
+
   public addCar(carData :FormData,callback=(arg:any)=>{}){
 
     let headersData= this.getAuthHeaders()
@@ -110,6 +115,7 @@ export class CarService  implements OnInit{
             carObject[key] = value;
           });
           carObject.id = id;
+          carObject.available=true
           this.cars.push(carObject);
 
           callback(id)
@@ -120,9 +126,45 @@ export class CarService  implements OnInit{
         }
       })
 
+     
+
     
     
   }
+  public editCar(id:number,carData :FormData,callback=(arg:any)=>{}){
+    let headersData= this.getAuthHeaders()
+
+    if(!headersData){
+      return 
+
+    }
+
+
+    this.http.put<Car>(`${this.baseUrl}/${id}`,carData,{headers:headersData}).subscribe({
+      next:(updatedCar)=>{
+       
+       
+       
+        this.cars= this.cars.map((c)=>{
+          // if the returned updated car doesn't hold a value in the picture then the picture didn't change
+          if(!updatedCar.picture){
+            updatedCar.picture= c.picture
+          }
+          return c.id==updatedCar.id ?  updatedCar : c
+
+        })
+
+        callback(updatedCar)
+
+      },
+      error:()=>{
+        alert('Erro while trying to update car ')
+      }
+    })
+  } 
+  
+  
+  
   ngOnInit(): void {
     this.fetchCars(0,8)
    

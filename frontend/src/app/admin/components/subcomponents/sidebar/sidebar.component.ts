@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from '../../../../services/auth.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -6,8 +8,13 @@ import { Component } from '@angular/core';
   styleUrl: './sidebar.component.css'
 })
 export class SidebarComponent {
+  constructor(private router:Router, private auth:AuthService){
+
+  }
 onLogout() {
-throw new Error('Method not implemented.');
+this.auth.logout(()=>{
+  this.router.navigateByUrl('/login')
+})
 }
 
 }

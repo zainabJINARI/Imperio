@@ -13,7 +13,7 @@ import { ExploreCarsPageComponent } from './components/explore-cars-page/explore
 import { RouterOutlet } from '@angular/router';
 import { BrandCardComponent } from './components/sub-components/brand-card/brand-card.component';
 import { CarCardComponent } from './components/sub-components/car-card/car-card.component';
-import { PopupLoadingComponent } from './components/sub-components/popup-loading/popup-loading.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -30,13 +30,14 @@ import { PopupLoadingComponent } from './components/sub-components/popup-loading
               ExploreCarsPageComponent,
               BrandCardComponent,
               CarCardComponent,
-              PopupLoadingComponent
+              
   ],
   imports: [
     CommonModule,
     ClientRoutingModule,
     RouterOutlet,
-    NgFor
+    NgFor,
+    SharedModule
   ]
 })
 export class ClientModule { }

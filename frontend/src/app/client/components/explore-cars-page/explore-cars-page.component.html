@@ -2,16 +2,19 @@
     
     
     
-    <app-popup-loading *ngIf="isloading"></app-popup-loading>
-  
+  <app-loading-popup *ngIf="isloading"></app-loading-popup>  
       
 
     <h2>Explore Our Complete Collection <span>{{ totalCars }} Cars</span></h2>
      
     
-      <div class="d-flex flex-row flex-wrap wrapper-results">
-        <app-car-card *ngFor="let car of cars" [car]="car"></app-car-card >
+      <div class="d-flex flex-row flex-wrap wrapper-results default" *ngIf="cars.length==0">
+        <span class="text-danger fw-bold">We Have No Cars Yet </span> 
+        <app-car-card [car]="undefined"></app-car-card>
       </div>
+      <div  class="d-flex flex-row flex-wrap wrapper-results">
+        <app-car-card *ngFor="let car of cars" [car]="car"></app-car-card >
+      </div> 
     
       <div class="d-flex justify-content-center mt-4 pagination">
         <ul class="pagination">
@@ -19,6 +22,7 @@
             <a class="page-link" (click)="prevPage()">Previous</a>
           </li>
           
+    
   
           <li *ngFor="let page of [].constructor(totalPages) ; let i = index" class="page-item" [class.active]="i === currentPage">
             <a class="page-link" (click)="goToPage(i)">{{ i }}</a>

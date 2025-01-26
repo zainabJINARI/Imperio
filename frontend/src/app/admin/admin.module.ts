@@ -8,6 +8,8 @@ import { AdminComponent } from './admin.component';
 import { CarsPageComponent } from './components/cars-page/cars-page.component';
 import { AddCarComponent } from './components/add-car/add-car.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from '../shared/shared.module';
+import { EditCarComponent } from './components/edit-car/edit-car.component';
 
 
 @NgModule({
@@ -15,13 +17,15 @@ import { ReactiveFormsModule } from '@angular/forms';
     AdminComponent,
     SidebarComponent,
     CarsPageComponent,
-    AddCarComponent
+    AddCarComponent,
+    EditCarComponent
   ],
   imports: [
     CommonModule,
     AdminRoutingModule,
     RouterOutlet,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
   ]
 })
 export class AdminModule { }
