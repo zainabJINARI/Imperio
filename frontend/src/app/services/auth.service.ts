@@ -9,6 +9,14 @@ export class AuthService {
   private baseUrl = 'http://localhost:8080/api/cars/auth'; // Adjust to your API's base URL
   constructor(private http: HttpClient) {}
 
+
+/**
+   * Authenticates the user by sending login credentials to the backend.
+   * If successful, stores the JWT token in local storage.
+   * @param username The username of the user.
+   * @param password The password of the user.
+   * @param callback A callback function executed after successful login.
+   */
   login(username: string, password: string,callback=()=>{}) {
     const params = new HttpParams()
       .set('username', username)
@@ -27,6 +35,11 @@ export class AuthService {
     })
   }
 
+   /**
+   * Retrieves the stored JWT token from local storage.
+   * Verifies if the token is still valid before returning it.
+   * @returns The JWT token if valid, otherwise null.
+   */
   getToken():string{
    
     
@@ -35,6 +48,11 @@ export class AuthService {
     return this.verifyToken(token) ? token : null
   }
 
+   /**
+   * Verifies the validity of a given JWT token by checking its expiration time.
+   * @param token The JWT token to verify.
+   * @returns True if the token is valid, otherwise false.
+   */
   verifyToken(token:string){
 
     if (!token) {
@@ -55,6 +73,13 @@ export class AuthService {
   
 
   }
+
+
+   /**
+   * Logs the user out by making a logout request to the backend.
+   * Clears local storage and executes the provided callback.
+   * @param callback A callback function executed after successful logout.
+   */
   logout(callback=()=>{}){
 
     this.http.post<any>(`${this.baseUrl}/logout`,null).subscribe({

@@ -25,18 +25,18 @@ public class CarDto {
     private String model;
     private String brand;
     private double pricePerDay;
-    @Builder.Default
-    private boolean isAvailable=true;
+    private Boolean isAvailable;
     private MultipartFile picture;
     
     
     
-    public CarDto(String model, String brand, double pricePerDay, MultipartFile picture) {
+    public CarDto(String model, String brand, double pricePerDay,Boolean isAvailable, MultipartFile picture) {
 		super();
 		this.model = model;
 		this.brand = brand;
 		this.pricePerDay = pricePerDay;
 		this.picture = picture;
+		this.isAvailable= isAvailable!=null ? isAvailable : true; 
 	}
 
 }

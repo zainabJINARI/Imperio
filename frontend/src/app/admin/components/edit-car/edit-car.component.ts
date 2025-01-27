@@ -69,6 +69,10 @@ export class EditCarComponent {
             formData.append('picture', imageFile);
           }
       
+          console.log('form data ')
+          formData.forEach((value, key) => {
+            console.log(value+ 'key'+ key)
+          });
           
           this.carService.editCar(this.id,formData,()=>{
             this.isLoading=false

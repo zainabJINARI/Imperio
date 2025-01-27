@@ -2,6 +2,7 @@ package com.imperio.rental.services;
 
 
 
+import java.io.Console;
 import java.io.IOException;
 import java.net.URI;
 import java.nio.file.Files;
@@ -37,8 +38,9 @@ public class CarServiceImpl  implements ICarService{
 
 	@Override
 	public Long createCar(CarDto car) throws IOException {
-		
+		System.out.println(car);
 		Car carCreated = carMapper.fromCarDto(car);
+		System.out.println(carCreated);
 		carRepository.save(carCreated);
 		return carRepository.save(carCreated).getId();
 	}
@@ -70,8 +72,8 @@ public class CarServiceImpl  implements ICarService{
 			 if (car.getBrand() != null) {
 			        carToUpdate.setBrand(car.getBrand());
 			    }
-			 if( !car.isAvailable() ) {
-				 carToUpdate.setAvailable(false);
+			 if( car.getIsAvailable()!=null  ) {
+				 carToUpdate.setAvailable(car.getIsAvailable());
 				 
 			 }
 			    if (car.getModel() != null) {
@@ -105,8 +107,6 @@ public class CarServiceImpl  implements ICarService{
 			    
 //			    if use didn't change the image the image is already present in the frontend no need to send it again 
 			    carToUpdate.setPicture(returnedImage);
-		        
-
 		        
 				return carToUpdate;
 		}

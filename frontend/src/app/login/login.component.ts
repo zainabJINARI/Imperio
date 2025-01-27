@@ -33,6 +33,7 @@ export class LoginComponent implements OnInit {
     let password = this.loginFormGroup.value.password;
     this.auth.login(username,password,()=>{
       this.isLoading=false
+      
       this.router.navigateByUrl('/admin')
 
     })

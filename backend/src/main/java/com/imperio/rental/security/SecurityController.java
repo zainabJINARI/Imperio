@@ -34,36 +34,45 @@ public class SecurityController {
 	
 	
 	
-	
-
+	 /**
+     * Authenticates a user and generates a JWT access token.
+     * 
+     * @param username The username of the user.
+     * @param password The password of the user.
+     * @return A map containing the generated JWT access token.
+     */
 	@PostMapping("/login")
 	public Map<String,String> login(String username, String password) {
-//		Authentifier l'utilisateur avec spring security
+        // Authenticate the user with Spring Security
 		Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
 		
-//		get user authorities like the roles of the current user
+		 // Retrieve user authorities (roles) and convert them to a space-separated string
 		String scope= authentication.getAuthorities().stream().map(a->a.getAuthority()).collect(Collectors.joining(" "));
-//		generer le JWT
-//		generer la date system pour créer le temps de validite de token JWT
+		  // Generate the JWT token expiration time
 		Instant instant = Instant.now();
 		
-//		creer JWT claims set
+		 // Create JWT claims set with issued time, expiration time, subject (username), and roles (scope)
 		JwtClaimsSet jwtClaimsSet = JwtClaimsSet.builder()
 				.issuedAt(instant)
-				.expiresAt(instant.plus(10, ChronoUnit.MINUTES))
+				.expiresAt(instant.plus(40, ChronoUnit.MINUTES))
 				.subject(username) 
 				.claim("scope", scope)
 				.build();
-//		creer le JWT Encoder parameters 
+		  // Create JWT encoder parameters 
 		JwtEncoderParameters jwtEncoderParameters = JwtEncoderParameters.from(JwsHeader.with(MacAlgorithm.HS512).build(),
 				jwtClaimsSet);
+		   // Encode and generate the JWT token
 		String jwt = jwtEncoder.encode(jwtEncoderParameters).getTokenValue();
 		return Map.of("access-token",jwt);
 
 				
 	}
 	
-	
+	 /**
+     * Logs out the current user by clearing the security context.
+     * 
+     * @return A map containing a logout success message.
+     */
 	@PostMapping("/logout")
 	public Map<String, String> logout() {
 		SecurityContextHolder.clearContext();
